@@ -1,3 +1,91 @@
-.navbarcustom{
-  color: #0b2e13;
+.navbar-band-style {
+  font-size: 3em;
+  color: #1111;
+  font-weight: 700;
+  margin-left: 9%;
+}
+
+.navbar-margin{
+  margin-left: 47%;
+  font-size: 130%;
+}
+
+.search{
+  margin-left: 9.8%;
+  padding: 20px;
+  background-color: white;
+  border-style: ridge;
+  border-width: 0px;
+  border-color: black;
+  margin-top: 0%;
+}
+
+label{
+  margin-right: 10px;
+}
+
+input{
+  margin-right: 30px;
+}
+
+select{
+  margin-right: 30px;
+}
+
+.icon{
+  position:relative;
+  margin-left: -5px;
+}
+
+.search-button{
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-right: 3px;
+}
+
+.walpaper-img{
+  position: relative;
+  width: 100%;
+  height: 0%;
+}
+
+.walpaper-button1{
+  position: absolute;
+  margin-top: 10%;
+  margin-left: 70%;
+  padding: 1% 3.9%;
+}
+
+.walpaper-button2{
+  position: absolute;
+  margin-top: 18%;
+  margin-left: 70%;
+  padding: 1% 5%;
+}
+
+.info-bar{
+  background-color: #4f9fcf;
+}
+
+.info-b{
+  margin: 50px;
+  margin-top: 10%;
+}
+
+.info-img{
+  width:200px;
+  height: 200px;
+}
+
+.heading{
+  background-color: #0b2e13;
+  margin: 5% 9% 9%;
+  padding: 2%;
+  color: white;
+}
+
+.footer{
+  background-color: #2a2730;
+  padding: 2%;
+  color: white;
 }
