@@ -1,17 +1,21 @@
 mixin search(col)
     nav(class="navbar navbar-expand-lg" style= col)
         div(class="search")
-            form(class="form-inline" action="/search" method="get")
+            form(class="form-inline" action="/search" method="post")
                 div(class="form-group")
                     label I'm looking for
-                    select(class="form-control" name="s")
+                    select(class="form-control" name="type")
                         option a stylist
                         option an educator
+                        option both
                 div(class="form-group")
                     label in city
-                    select(class="form-control")
-                        option city 1
-                        option city 2
+                    select(class="form-control" name="city1")
+                        option Los Angeles
+                        option Florida
+                        option Seattle
+                        option Raleigh
+                        option Miami
                 div(class="form-group")
                      label from
                      input(class="form-control" type="date" style="margin-right:0")
@@ -22,8 +26,6 @@ mixin search(col)
                     img(src="images/datepicker.png" width="40" height="40" alt="" class="icon" style="margin-right:25px")
                 div(class="form-group")
                     button(class="form-control search-button" type="submit") Search
-
-
 
 
 
