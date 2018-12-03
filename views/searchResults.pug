@@ -74,7 +74,8 @@ block main
                         input(class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked)
                         span Any
 
-            div(class="col-sm-6 searchResults")
-                h2 Search results
-
+            div(class="col-sm-6")
+                h2(style="padding:20px") Search results
+                include includes/searchResultView
+                +searchResult(0)
 
