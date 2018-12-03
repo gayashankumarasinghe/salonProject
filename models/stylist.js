@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     fburl: DataTypes.STRING,
     description: DataTypes.TEXT,
     gender: DataTypes.ENUM('Male','Female'),
-    stylistType: DataTypes.ENUM('Stylist','Educator')
+    stylistType: DataTypes.ENUM('Stylist','Educator'),
+    rating: DataTypes.FLOAT(2,1),
   }, {});
   Stylist.associate = function(models) {
     Stylist.hasMany(models.Job);

@@ -1,0 +1,19 @@
+mixin topRated(no)
+    div(class="card")
+        div(class="box")
+            div(class="img")
+                - var path = "userImages/"+stylistsDetails[no].Images[0].id+".jpg"
+                img(src= path class="imgcard")
+
+            h2 #{stylistsDetails[no].firstName} #{stylistsDetails[no].lastName}
+            p(style="font-size:0.9em") #{stylistsDetails[no].Location.street}, #{stylistsDetails[no].Location.city}, #{stylistsDetails[no].Location.state}
+            hr
+            div
+                span(class="skillSpan") Skills :
+                each val in stylistsDetails[no].Skils
+                    span(style="font-size:0.8em")= val.skilDescription + ", "
+
+            hr
+            p Ratings: #{stylistsDetails[no].rating} /5
+
+

@@ -3,6 +3,7 @@ extends layouts/layout
 block main
   include includes/navbar
   include includes/search
+  +search("background-color: #17A589")
   div(class="container-fluid")
     div(class="row")
       img(src="images/Haircuts-Hairstyles.jpg" class="img-fluid walpaper-img" alt="Responsive image")
@@ -24,12 +25,38 @@ block main
     div(class="row heading")
       h2 TOP RATED HAIR STYLISTS
 
-    div(class="row heading")
-      h2 TOP RATED HAIR STYLISTS
+    div(class="row")
+      div(class="col")
+        img(src="images/prev.png" class="prevbtn")
+      div(class="col")
+        include includes/topRatedStylistView
+        +topRated(0)
+      div(class="col")
+        include includes/topRatedStylistView
+        +topRated(1)
+      div(class="col")
+        include includes/topRatedStylistView
+        +topRated(2)
+      div(class="col")
+        img(src="images/next.png" class="nextbtn")
 
 
+    //div(class="row heading")
+      //h2 TOP RATED EDUCATORS
 
-  include includes/footer
+    //div(class="row")
+       div(class="col")
+          img(src="images/prev.png" class="prevbtn")
+       div(class="col")
+          include includes/topRatedStylistView
+       div(class="col")
+          include includes/topRatedStylistView
+       div(class="col")
+          include includes/topRatedStylistView
+       div(class="col")
+          img(src="images/next.png" class="nextbtn")
+
+    include includes/footer
 
 
 

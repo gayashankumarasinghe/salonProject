@@ -1,0 +1,51 @@
+extends layouts/layout
+block main
+    include includes/navbar
+    include includes/search
+    +search("background-color: ")
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-sm-1")
+            div(class="col-sm-3 advancedSearch")
+                p(class="refine") Refine Your Search
+                hr
+                form(action="/search" method="post")
+                    p Ratings
+                    div(class="form-group row advancedSearch2")
+                        input(type="checkbox" class="form-check-input" value="")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star ")
+                    div(class="form-group row advancedSearch2")
+                        input(type="checkbox" class="form-check-input" value="")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star")
+                    div(class="form-group row advancedSearch2")
+                        input(type="checkbox" class="form-check-input" value="")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star ")
+                        span(class="fa fa-star ")
+                    div(class="form-group row advancedSearch2")
+                        input(type="checkbox" class="form-check-input" value="")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star ")
+                    div(class="form-group row advancedSearch2")
+                        input(type="checkbox" class="form-check-input" value="")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+                        span(class="fa fa-star checked")
+
+                hr
+            div(class="col-sm-6 searchResults")
