@@ -18,15 +18,15 @@ module.exports.advSearch = function (req, res) {
     var gender = req.body.gen;
     var maxPriceDayFrom = req.body.frompriceday;
     var maxPriceDayTo = req.body.topriceday;
-    //var maxPriceEvening = req.body.priceevening;
-    //res.send(city+" "+type+" "+date+" "+gender);
-    //res.render('searchResults');
+    var maxPriceEveningFrom = req.body.frompriceevening;
+    var maxPriceEveningTo = req.body.topriceevening;
+    var maxRating = req.body.s_rate;
+    var stySkills = req.body.skill;
 
-
-    if (date==="") { // Gender and Date not specified
+    if (date==="" && gender==="Any") {
         if (type==='both') {
             db.Stylist.findAll({
-                where: {gender: gender},
+                where: {rating: {[Op.gt]: maxRating}},
                 attributes: ['id','firstName', 'lastName', 'rating'],
                 order: [['rating','DESC']],
                 include: [{
@@ -34,7 +34,7 @@ module.exports.advSearch = function (req, res) {
                     where: {city: city}
                 }, db.Skil, db.Image, {
                     model: db.Price,
-                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}}
+                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
                 }]
             }).then(sty=>{
                 //console.log(sty[0]);
@@ -45,7 +45,7 @@ module.exports.advSearch = function (req, res) {
             });
         }else{
             db.Stylist.findAll({
-                where: {stylistType: type, gender: gender},
+                where: {stylistType: type, rating: {[Op.gt]: maxRating}},
                 attributes: ['id','firstName', 'lastName', 'rating'],
                 order: [['rating','DESC']],
                 include: [{
@@ -53,7 +53,7 @@ module.exports.advSearch = function (req, res) {
                     where: {city: city}
                 }, db.Skil, db.Image, {
                     model: db.Price,
-                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}}
+                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
                 }]
             }).then(sty=>{
                 //console.log(sty[0]);
@@ -65,7 +65,46 @@ module.exports.advSearch = function (req, res) {
         }
 
     }else {
-
-        res.send('Error');
+        if (date==="") { // Gender and Date not specified
+            if (type === 'both') {
+                db.Stylist.findAll({
+                    where: {gender: gender, rating: {[Op.gt]: maxRating}},
+                    attributes: ['id', 'firstName', 'lastName', 'rating'],
+                    order: [['rating', 'DESC']],
+                    include: [{
+                        model: db.Location,
+                        where: {city: city}
+                    }, db.Skil, db.Image, {
+                        model: db.Price,
+                        where: {dayPrice: {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
+                    }]
+                }).then(sty => {
+                    //console.log(sty[0]);
+                    res.render('searchResults', {
+                        stylistsDetails: sty,
+                        len: sty.length
+                    });
+                });
+            } else {
+                db.Stylist.findAll({
+                    where: {stylistType: type, gender: gender, rating: {[Op.gt]: maxRating}},
+                    attributes: ['id', 'firstName', 'lastName', 'rating'],
+                    order: [['rating', 'DESC']],
+                    include: [{
+                        model: db.Location,
+                        where: {city: city}
+                    }, db.Skil, db.Image, {
+                        model: db.Price,
+                        where: {dayPrice: {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
+                    }]
+                }).then(sty => {
+                    //console.log(sty[0]);
+                    res.render('searchResults', {
+                        stylistsDetails: sty,
+                        len: sty.length
+                    });
+                });
+            }
+        }
     }
 };

@@ -1,60 +1,82 @@
 extends layouts/layout
 
 block main
-  include includes/navbar
+  include includes/navbar2
   include includes/search
-  +search("background-color: #17A589")
+  +search()
   div(class="container-fluid")
     div(class="row")
-      img(src="images/Haircuts-Hairstyles.jpg" class="img-fluid walpaper-img" alt="Responsive image")
-      button(type="submit" class="btn-lg btn-info walpaper-button1") I am a stylist/ educator
-      button(type="submit" class="btn-lg btn-info walpaper-button2") I am a salon owner
+      img(src="images/wallpaper4.jpg" class="img-fluid walpaper-img" alt="Responsive image")
+      button(type="button" class="btn btn-info walpaper-button1" style="background:black; border-color:043B40;") I am a stylist/ educator
+      button(type="button" class="btn btn-info walpaper-button2" style="background:black; border-color:043B40;") I am a salon owner
 
-    div(class="row info-bar")
+    div(class="container-fluid")
+      div(class="row" style="margin-top:100px")
         div(class="col")
-        div(class="col info-b")
-          img(src="images/Search.jpg" class="img-fluid rounded-circle info-img")
-          h3 Find 1000+
-          h3 Stylist/ educators and salons
-        div(class="col info-b")
-          img(src="images/dollar.png" class="img-fluid rounded-circle info-img")
-        div(class="col info-b")
-          img(src="images/heart.jpg" class="img-fluid rounded-circle info-img")
-        div(class="col")
+          div(class="wrap")
+            div(class="ico-wrap")
+              span(class="mbr-iconfont fa-search fa")
+            div(class="text-wrap vcenter")
+              h2(class="mbr-fonts-style mbr-bold mbr-section-title3 display-5") 1000+ Stylists and Educators
+              p(class="mbr-fonts-style text1 mbr-text display-6") We provide best saloons around you
 
-    div(class="row heading")
-      h2 TOP RATED HAIR STYLISTS
+        div(class="col")
+          div(class="wrap")
+            div(class="ico-wrap")
+              span(class="mbr-iconfont fa-credit-card fa")
+            div(class="text-wrap vcenter")
+              h2(class="mbr-fonts-style mbr-bold mbr-section-title3 display-5") We provide best rates
+              p(class="mbr-fonts-style text1 mbr-text display-6") Registration is free, No travelling costs
+
+        div(class="col")
+          div(class="wrap")
+            div(class="ico-wrap")
+              span(class="mbr-iconfont fa-heart fa")
+            div(class="text-wrap vcenter")
+              h2(class="mbr-fonts-style mbr-bold mbr-section-title3 display-5") Salons Love Us
+              p(class="mbr-fonts-style text1 mbr-text display-6") 1000+ Ratings, 1000+ Daily Visitors
+
+
+
 
     div(class="row")
-      div(class="col")
-        img(src="images/prev.png" class="prevbtn")
-      div(class="col")
+      div(class="col-md-1")
+      div(class="col-md-10 heading")
+        h2 TOP RATED HAIR STYLISTS
+
+    div(class="row" style="margin-top:100px")
+      div(class="col-md-1")
+      div(class="col-md-2 crd-margin")
         include includes/topRatedStylistView
         +topRated(0)
-      div(class="col")
+      div(class="col-md-2 crd-margin")
         include includes/topRatedStylistView
         +topRated(1)
-      div(class="col")
+      div(class="col-md-2 crd-margin")
         include includes/topRatedStylistView
         +topRated(2)
-      div(class="col")
-        img(src="images/next.png" class="nextbtn")
+      div(class="col-md-2 crd-margin")
+        include includes/topRatedStylistView
+        +topRated(3)
 
 
-    //div(class="row heading")
-      //h2 TOP RATED EDUCATORS
+    div(class="row")
+      div(class="col-md-2")
+      div(class="col-md-1 ")
+      div(class="col-md-3 faq faqback")
+          div(class="ico-wrap")
+            img(src="images/question.png" width=400 height=400)
+      div(class="col-md-3 faq faqback")
+        div(style="margin-top:20%")
+          h2(style="font-weight:bold; padding:30px") If you have any question
+          span(style="font-weight:bold") Ask from our
+          a(href="#" style="font-weight:bold")
+            span customer services
+          p
+          span(style="font-weight:bold") or search for
+          a(href="#" style="font-weight:bold")
+            span FAQs
 
-    //div(class="row")
-       div(class="col")
-          img(src="images/prev.png" class="prevbtn")
-       div(class="col")
-          include includes/topRatedStylistView
-       div(class="col")
-          include includes/topRatedStylistView
-       div(class="col")
-          include includes/topRatedStylistView
-       div(class="col")
-          img(src="images/next.png" class="nextbtn")
 
     include includes/footer
 

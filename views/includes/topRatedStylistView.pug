@@ -3,7 +3,9 @@ mixin topRated(no)
         div(class="box")
             div(class="img")
                 - var path = "userImages/"+stylistsDetails[no].Images[0].id+".jpg"
-                img(src= path class="imgcard")
+                -var profilePath = "/profile?id="+stylistsDetails[no].id
+                a(href=profilePath)
+                    img(src= path class="imgcard")
 
             h2 #{stylistsDetails[no].firstName} #{stylistsDetails[no].lastName}
             p(style="font-size:0.9em") #{stylistsDetails[no].Location.street}, #{stylistsDetails[no].Location.city}, #{stylistsDetails[no].Location.state}

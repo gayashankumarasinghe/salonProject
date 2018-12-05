@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Schedule = sequelize.define('Schedule', {
-    date: DataTypes.DATE,
+    scheduleDate: DataTypes.DATEONLY,
     timeSlot: DataTypes.ENUM('D1','D2','E1','E2'),
     scheduleStatus: DataTypes.ENUM('Booked','Busy','Available','Pending')
   }, {});

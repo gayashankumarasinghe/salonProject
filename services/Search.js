@@ -14,11 +14,12 @@ module.exports.primarySearch = function (req, res) {
 
     var city = req.body.city1;
     var from = req.body.date1;
+
     //var to = req.body.date2;
     //console.log(from);
     //console.log(to);
    // res.send(type+ city);
-
+    console.log(from);
     if (from==="") {
         if (type==='both') {
             db.Stylist.findAll({
@@ -56,31 +57,37 @@ module.exports.primarySearch = function (req, res) {
     }else {
         db.Stylist.findAll({
             where: {stylistType: type},
-            attributes: ['id','firstName', 'lastName', 'rating'],
             order: [['rating','DESC']],
-            include: [{
-                model: db.Location,
-                where: {city: city}
-            }, db.Skil, db.Image, db.Price, {
-                model: db.Schedule,
-                where: {}
-            }]
+            include: [db.Schedule]
         }).then(sty=>{
-            //console.log(sty.length);
+            var ids = [];
 
-            sty.forEach(function(element) {
-                console.log(element.Schedules);
+            sty.forEach(element => {
+                var scheStatus = element.Schedules[0].scheduleStatus;
+                var scheDate = element.Schedules[0].scheduleDate;
+                if (scheDate == from && scheStatus=='Busy'){
+                    ids.push(sty[1].Schedules[0].StylistId);
+                }
+            });
+            //ids.push(8);
+            console.log("ids: "+ids);
+
+            db.Stylist.findAll({
+                where: {id: {[Op.ne]: 7}},
+                order: [['rating','DESC']],
+                include: [{
+                    model: db.Location,
+                    where: {city: city}
+                }, db.Skil, db.Image, db.Price]
+            }).then(styNew =>{
+                //console.log(styNew);
+                res.render('searchResults',{
+                    stylistsDetails: styNew,
+                    len: styNew.length
+                });
             });
 
 
-
-            res.render('searchResults',{
-                stylistsDetails: sty,
-                styType: type,
-                styCity: city,
-                styDate: from
-
-            });
         });
     }
 

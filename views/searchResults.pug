@@ -1,6 +1,6 @@
 extends layouts/layout
 block main
-    include includes/navbar
+    include includes/navbar2
     //include includes/search
     //+search("background-color: ")
     div(class="container-fluid")
@@ -32,64 +32,31 @@ block main
                         p(class="refine") Refine Your Search
                         hr
                         p Ratings
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star ")
-                            span(class="fa fa-star ")
-                            span(class="fa fa-star ")
-                            span(class="fa fa-star ")
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="s_rate" value=4)
                             span(class="fa fa-star checked")
                             span(class="fa fa-star checked")
-                            span(class="fa fa-star ")
-                            span(class="fa fa-star ")
+                            span(class="fa fa-star checked")
+                            span(class="fa fa-star checked")
+                            span(class="fa fa-star checked")
+                            span(style="font-size:0.8em")  (Top rated)
+                            p
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="s_rate" value=0 checked)
+                            span(class="fa fa-star checked")
+                            span(class="fa fa-star checked")
+                            span(class="fa fa-star checked")
                             span(class="fa fa-star")
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star ")
-                            span(class="fa fa-star ")
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star ")
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-                            span(class="fa fa-star checked")
-
-                        hr
-                        p Time
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span From 8 am to 12 pm
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span From 12 pm to 4 pm
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span From 4 pm to 8 pm
-                        div(class="form-group row advancedSearch2")
-                            input(type="checkbox" class="form-check-input" value="")
-                            span From 8 pm to 12 am
+                            span(class="fa fa-star")
+                            span(style="font-size:0.8em")  (Any)
 
                         hr
                         p Gender
                         div(class="form-check form-check-inline")
-                            input(class="form-check-input" type="radio" name="gen" id="Male" value="Male" checked)
+                            input(class="form-check-input" type="radio" name="gen" id="Male" value="Male")
                             span Male
                         div(class="form-check form-check-inline")
-                            input(class="form-check-input" type="radio" name="gen" id="Female" value="Female" checked)
+                            input(class="form-check-input" type="radio" name="gen" id="Female" value="Female")
                             span Female
                         div(class="form-check form-check-inline")
                             input(class="form-check-input" type="radio" name="gen" id="Any" value="Any" checked)
@@ -99,38 +66,45 @@ block main
                         p Max price per session
                         div(class="col-xs-2")
                             label Day sessions (8 am to 4 pm)
-                            input(class="form-control" type="number" name="frompriceday")
-                            input(class="form-control" type="number" name="topriceday")
+                            input(class="form-control" type="number" name="frompriceday" value="0" style="width:100px")
+                            input(class="form-control" type="number" name="topriceday" value="1000" style="width:100px")
                         div(class="col-xs-2")
+                            p
                             label Evening sessions (4 pm to 12 am)
-                            input(class="form-control" id="ex2" type="number" name="priceevening")
+                            input(class="form-control" type="number" name="frompriceevening" value="0" style="width:100px")
+                            input(class="form-control" type="number" name="topriceevening" value="1000" style="width:100px")
 
                         hr
                         p Skills
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Men classic
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Women classic
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Men latest fashion
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Women latest fashion
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Kids fashion
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Bridal
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Massage
-                            div(class="form-group row advancedSearch2")
-                                input(type="checkbox" class="form-check-input" value="")
-                                span Colour
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Men classic")
+                            span Men classic
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Women classic")
+                            span Women classic
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Men latest fashion")
+                            span Men latest fashion
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Women latest fashion")
+                            span Women latest fashion
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Kids fashion")
+                            span Kids fashion
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Bridal")
+                            span Bridal
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Massage")
+                            span Massage
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Massage")
+                            span Massage
+                        div(class="form-check")
+                            input(class="form-check-input" type="radio" name="skill" value="Colour")
+                            span Colour
+
+                        p
                         div(class="form-group")
                             button(class="form-control search-button" type="submit") Search
 

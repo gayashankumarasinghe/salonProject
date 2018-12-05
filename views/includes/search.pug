@@ -1,28 +1,31 @@
-mixin search(col)
-    nav(class="navbar navbar-expand-lg" style= col)
-        div(class="search")
-            form(class="form-inline" action="/search" method="post")
-                div(class="form-group")
-                    label I'm looking for
-                    select(class="form-control" name="stytype")
-                        option a stylist
-                        option an educator
-                        option both
-                div(class="form-group")
-                    label in city
-                    select(class="form-control" name="city1")
-                        option Los Angeles
-                        option Orlando
-                        option Seattle
-                        option Raleigh
-                        option Miami
-                        option Rochester
-                div(class="form-group")
-                     label from
-                     input(class="form-control" type="date" style="margin-right:0" name="date1")
-                     img(src="images/datepicker.png" width="40" height="40" alt="" class="icon" style="margin-right:20px")
-                div(class="form-group")
-                    button(class="form-control search-button" type="submit") Search
+mixin search()
+    div(class="container-fluid")
+        div(class="row search-row")
+            div(class="col-md-1")
+            div(class="col-md-10 navbar navbar-expand-lg")
+                    div(class="search")
+                        form(class="form-inline" action="/search" method="post")
+                            div(class="form-group")
+                                label I'm looking for
+                                select(class="form-control" name="type" style="width:200px")
+                                    option a stylist
+                                    option an educator
+                                    option both
+                            div(class="form-group")
+                                label in city
+                                select(class="form-control" name="city1" style="width:200px")
+                                    option Los Angeles
+                                    option Orlando
+                                    option Seattle
+                                    option Raleigh
+                                    option Miami
+                                    option Rochester
+                            div(class="form-group")
+                                 label on
+                                 input(class="form-control" type="date" style="margin-right:0; width:200px" name="date1" )
+                                 img(src="images/datepicker.png" width="40" height="40" alt="" class="icon" style="margin-right:20px")
+                            div(class="form-group")
+                                button(class="form-control search-button" type="submit" style="width:200px") Search
 
 
 

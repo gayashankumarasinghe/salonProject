@@ -1,6 +1,6 @@
 extends layouts/layout2
 block main
-    include includes/navbar
+    include includes/navbar2
 
     div(class="container-fluid")
         div(class="row p-main justify-content-start")
@@ -49,9 +49,10 @@ block main
                         hr
                         span *travelling cost is no included
 
-            div(class="col-md-8 p-main2")
-
-
+            div(class="col-md-1 p-mainNon")
+            div(class="col-md-7 p-main2")
+                p(style="font-weight:bold; font-size:2em; padding:10px") Available on
+                include includes/calender
 
 
 
