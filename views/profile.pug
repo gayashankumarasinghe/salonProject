@@ -1,0 +1,58 @@
+extends layouts/layout2
+block main
+    include includes/navbar
+
+    div(class="container-fluid")
+        div(class="row p-main justify-content-start")
+            div(class="col-md-1")
+            div(class="col-md-3")
+                - var path = "userImages/"+stylistsDetails.Images[0].id+".jpg"
+                img(src= path class="p-img")
+            div(class="col-md-7")
+                span(class="p-heading") #{stylistsDetails.firstName} #{stylistsDetails.lastName}
+                span     #{stylistsDetails.rating} /5
+                p(class="p-heading2") #{stylistsDetails.stylistType}
+                hr
+                p #{stylistsDetails.Location.street}, #{stylistsDetails.Location.city}, #{stylistsDetails.Location.state}
+                p(style="font-size:0.8em; font-weight:bold; margin-bottom:0") Skills:
+                each val in stylistsDetails.Skils
+                    span(style="font-size:0.8em")= val.skilDescription + ", "
+                p
+                p(style="font-size:0.8em; font-weight:bold; margin-bottom:0") About #{stylistsDetails.firstName}:
+                span(style="font-size:0.8em") #{stylistsDetails.description}
+
+            div(class="col-md-1")
+
+        div(class="row justify-content-start")
+            div(class="col-md-1")
+            div(class="col-md-2 p-main2")
+                div(class="")
+                    div(class="price-table pt-bg-green")
+                        div
+                            span Day Booking
+                            span from 8 am to 4 pm
+                        a(href="#") #{stylistsDetails.Price.dayPrice} $ per session
+                        hr
+                        p Day session 1:  8 am to 12 pm
+                        p Day session 2: 12 pm to 4 pm
+                        hr
+                        span *travelling cost is no included
+                div(class="")
+                    div(class="price-table pt-bg-black")
+                        div
+                            span Evening Booking
+                            span from 4 pm to 12 am
+                        a(href="#") #{stylistsDetails.Price.eveningPrice} $ per session
+                        hr
+                        p Evening session 1:  4 am to 8 noon
+                        p Evening session 2: 8 noon to 12 pm
+                        hr
+                        span *travelling cost is no included
+
+            div(class="col-md-8 p-main2")
+
+
+
+
+
+    include includes/footer

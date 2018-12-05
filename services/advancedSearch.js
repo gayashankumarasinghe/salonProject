@@ -2,7 +2,8 @@ const db = require('../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-module.exports.primarySearch = function (req, res) {
+module.exports.advSearch = function (req, res) {
+
     var type;
     if(req.body.type==='a stylist'){
         type = 'Stylist';
@@ -13,21 +14,28 @@ module.exports.primarySearch = function (req, res) {
     }
 
     var city = req.body.city1;
-    var from = req.body.date1;
-    //var to = req.body.date2;
-    //console.log(from);
-    //console.log(to);
-   // res.send(type+ city);
+    var date = req.body.date1;
+    var gender = req.body.gen;
+    var maxPriceDayFrom = req.body.frompriceday;
+    var maxPriceDayTo = req.body.topriceday;
+    //var maxPriceEvening = req.body.priceevening;
+    //res.send(city+" "+type+" "+date+" "+gender);
+    //res.render('searchResults');
 
-    if (from==="") {
+
+    if (date==="") { // Gender and Date not specified
         if (type==='both') {
             db.Stylist.findAll({
+                where: {gender: gender},
                 attributes: ['id','firstName', 'lastName', 'rating'],
                 order: [['rating','DESC']],
                 include: [{
                     model: db.Location,
                     where: {city: city}
-                }, db.Skil, db.Image, db.Price]
+                }, db.Skil, db.Image, {
+                    model: db.Price,
+                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}}
+                }]
             }).then(sty=>{
                 //console.log(sty[0]);
                 res.render('searchResults',{
@@ -37,13 +45,16 @@ module.exports.primarySearch = function (req, res) {
             });
         }else{
             db.Stylist.findAll({
-                where: {stylistType: type},
+                where: {stylistType: type, gender: gender},
                 attributes: ['id','firstName', 'lastName', 'rating'],
                 order: [['rating','DESC']],
                 include: [{
                     model: db.Location,
                     where: {city: city}
-                }, db.Skil, db.Image, db.Price]
+                }, db.Skil, db.Image, {
+                    model: db.Price,
+                    where: {dayPrice : {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}}
+                }]
             }).then(sty=>{
                 //console.log(sty[0]);
                 res.render('searchResults',{
@@ -54,35 +65,7 @@ module.exports.primarySearch = function (req, res) {
         }
 
     }else {
-        db.Stylist.findAll({
-            where: {stylistType: type},
-            attributes: ['id','firstName', 'lastName', 'rating'],
-            order: [['rating','DESC']],
-            include: [{
-                model: db.Location,
-                where: {city: city}
-            }, db.Skil, db.Image, db.Price, {
-                model: db.Schedule,
-                where: {}
-            }]
-        }).then(sty=>{
-            //console.log(sty.length);
 
-            sty.forEach(function(element) {
-                console.log(element.Schedules);
-            });
-
-
-
-            res.render('searchResults',{
-                stylistsDetails: sty,
-                styType: type,
-                styCity: city,
-                styDate: from
-
-            });
-        });
+        res.send('Error');
     }
-
-
 };

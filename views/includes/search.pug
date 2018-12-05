@@ -4,7 +4,7 @@ mixin search(col)
             form(class="form-inline" action="/search" method="post")
                 div(class="form-group")
                     label I'm looking for
-                    select(class="form-control" name="type")
+                    select(class="form-control" name="stytype")
                         option a stylist
                         option an educator
                         option both
@@ -12,18 +12,15 @@ mixin search(col)
                     label in city
                     select(class="form-control" name="city1")
                         option Los Angeles
-                        option Florida
+                        option Orlando
                         option Seattle
                         option Raleigh
                         option Miami
+                        option Rochester
                 div(class="form-group")
                      label from
-                     input(class="form-control" type="date" style="margin-right:0")
+                     input(class="form-control" type="date" style="margin-right:0" name="date1")
                      img(src="images/datepicker.png" width="40" height="40" alt="" class="icon" style="margin-right:20px")
-                div(class="form-group")
-                    label to
-                    input(class="form-control" type="date" style="margin-right:0")
-                    img(src="images/datepicker.png" width="40" height="40" alt="" class="icon" style="margin-right:25px")
                 div(class="form-group")
                     button(class="form-control search-button" type="submit") Search
 
