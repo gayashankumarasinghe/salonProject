@@ -22,13 +22,14 @@ module.exports.advSearch = function (req, res) {
     var maxPriceEveningTo = req.body.topriceevening;
     var maxRating = req.body.s_rate;
     var stySkills = req.body.skill;
+    var sort = req.body.sort;
 
     if (date==="" && gender==="Any") {
         if (type==='both') {
             db.Stylist.findAll({
                 where: {rating: {[Op.gt]: maxRating}},
                 attributes: ['id','firstName', 'lastName', 'rating'],
-                order: [['rating','DESC']],
+                order: [["rating",'DESC']],
                 include: [{
                     model: db.Location,
                     where: {city: city}
@@ -99,6 +100,49 @@ module.exports.advSearch = function (req, res) {
                     }]
                 }).then(sty => {
                     //console.log(sty[0]);
+                    res.render('searchResults', {
+                        stylistsDetails: sty,
+                        len: sty.length
+                    });
+                });
+            }
+        }else{
+            if (type === 'both') {
+                db.Stylist.findAll({
+                    where: {gender: gender, rating: {[Op.gt]: maxRating}},
+                    attributes: ['id', 'firstName', 'lastName', 'rating'],
+                    order: [['rating', 'DESC']],
+                    include: [{
+                        model: db.Location,
+                        where: {city: city}
+                    }, db.Skil, db.Image, {
+                        model: db.Price,
+                        where: {dayPrice: {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
+                    }, {
+                        model: db.Schedule,
+                        where: {scheduleDate: {[Op.ne]:date}}
+                    }]
+                }).then(sty => {
+                    //console.log(sty[0]);
+                    res.render('searchResults', {
+                        stylistsDetails: sty,
+                        len: sty.length
+                    });
+                });
+            } else {
+                db.Stylist.findAll({
+                    where: {stylistType: type, gender: gender, rating: {[Op.gt]: maxRating}},
+                    attributes: ['id', 'firstName', 'lastName', 'rating'],
+                    order: [['rating', 'DESC']],
+                    include: [{
+                        model: db.Location,
+                        where: {city: city}
+                    }, db.Skil, db.Image, {
+                        model: db.Price,
+                        where: {dayPrice: {[Op.between]: [maxPriceDayFrom, maxPriceDayTo]}, eveningPrice: {[Op.between]: [maxPriceEveningFrom, maxPriceEveningTo]}}
+                    }, db.Schedule]
+                }).then(sty => {
+                    console.log(sty);
                     res.render('searchResults', {
                         stylistsDetails: sty,
                         len: sty.length

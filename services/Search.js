@@ -55,40 +55,48 @@ module.exports.primarySearch = function (req, res) {
         }
 
     }else {
-        db.Stylist.findAll({
-            where: {stylistType: type},
-            order: [['rating','DESC']],
-            include: [db.Schedule]
-        }).then(sty=>{
-            var ids = [];
 
-            sty.forEach(element => {
-                var scheStatus = element.Schedules[0].scheduleStatus;
-                var scheDate = element.Schedules[0].scheduleDate;
-                if (scheDate == from && scheStatus=='Busy'){
-                    ids.push(sty[1].Schedules[0].StylistId);
-                }
-            });
-            //ids.push(8);
-            console.log("ids: "+ids);
-
+        if (type==='both'){
             db.Stylist.findAll({
-                where: {id: {[Op.ne]: 7}},
+                attributes: ['id','firstName', 'lastName', 'rating'],
                 order: [['rating','DESC']],
                 include: [{
                     model: db.Location,
                     where: {city: city}
-                }, db.Skil, db.Image, db.Price]
-            }).then(styNew =>{
-                //console.log(styNew);
+                }, db.Skil, db.Image, db.Price,{
+                    model: db.Schedule,
+                    where: {scheduleDate: {[Op.ne]:from}}
+                }]
+            }).then(sty=>{
+                console.log(sty);
                 res.render('searchResults',{
-                    stylistsDetails: styNew,
-                    len: styNew.length
+                    stylistsDetails: sty,
+                    len: sty.length
                 });
             });
+        }else {
+            db.Stylist.findAll({
+                where: {stylistType: type},
+                attributes: ['id','firstName', 'lastName', 'rating'],
+                order: [['rating','DESC']],
+                include: [{
+                    model: db.Location,
+                    where: {city: city}
+                }, db.Skil, db.Image, db.Price,{
+                    model: db.Schedule,
+                    where: {scheduleDate: {[Op.ne]:from}}
+                }]
+            }).then(sty=>{
+                res.render('searchResults',{
+                    stylistsDetails: sty,
+                    len: sty.length
+                });
+            });
+        }
 
 
-        });
+
+
     }
 
 
